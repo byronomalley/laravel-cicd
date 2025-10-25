@@ -1,0 +1,29 @@
+name: No Plans To Merge
+
+
+on:
+  pull_request:
+
+permissions:
+  pull-requests: write
+
+jobs:
+  laravel-pint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v5.0.0
+
+      - name: Setup PHP and Composer
+        uses: shivammathur/setup-php@2.35.5
+        with:
+          php-version: '8.4'
+          tools: composer:v2
+
+      - name: Install Laravel Pint
+        run: composer global require laravel/pint
+
+      - name: Run Laravel Pint
+        run: pint --test
+      - name: Push Changes Back To Repo
+        run: echo "TODO"
