@@ -9,7 +9,7 @@ permissions:
   packages: write
   deployments: write
   statuses: write
-  contents: read
+  contents: write
 
 jobs:
   laravel-pint:
