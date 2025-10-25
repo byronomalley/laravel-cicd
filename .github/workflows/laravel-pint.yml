@@ -13,6 +13,9 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v5.0.0
+        # Make sure the final git push works
+        with:
+          ref: ${{ github.head_ref }}
 
       - name: Setup PHP and Composer
         uses: shivammathur/setup-php@2.35.5
@@ -24,6 +27,11 @@ jobs:
         run: composer global require laravel/pint
 
       - name: Run Laravel Pint
-        run: pint --test
+        run: pint
       - name: Push Changes Back To Repo
-        run: echo "TODO"
+        run: |
+          git config --global user.name "gh-actions"
+          git config --global user.email "byronomalley950@gmail.com"
+          git add .
+          git commit -m "Laravel Pint"
+          git push
