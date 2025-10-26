@@ -38,6 +38,8 @@ in the `tests/TestCase.php:setup()` method
 see for workflow references: https://github.com/laravel/framework/tree/12.x/.github/workflows
 
 
+https://github.com/shivammathur/cache-extensions
+
 
 check what is in the composer cache
 `ls $(composer config cache-files-dir)`
