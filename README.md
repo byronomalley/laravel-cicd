@@ -20,9 +20,17 @@ sometimes there is nothing to commit, so return success even if git commit fails
 # Workflow: tests
 
 - install dependencies
-- set up env
-- 
+- set up env 
 
+make sure .env.example has the following variables set, as they are used as defaults in workflows:
+```
+DB_CONNECTION=mariadb
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=laravel
+DB_USERNAME=root
+DB_PASSWORD=
+```
 If you have issues with "Vite manifest not found", enable the following
 in the `tests/TestCase.php:setup()` method
 `$this->withoutVite();`
