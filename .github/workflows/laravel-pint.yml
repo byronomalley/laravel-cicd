@@ -1,9 +1,9 @@
 name: Laravel Pint
 
 on:
-  pull_request:
-    types:
-      - closed
+  push:
+    branches:
+      - main
 
 permissions:
   pull-requests: write # Necessary to comment on PRs
@@ -33,11 +33,9 @@ jobs:
         run: composer global require laravel/pint
 
       - name: Run Laravel Pint
-        if: ${{ github.event.pull_request.merged == true }}
         run: pint
 
       - name: Push Changes Back To Repo
-        if: ${{ github.event.pull_request.merged == true }}
         run: |
           git config --global user.name "gh-actions"
           git config --global user.email "byronomalley950@gmail.com"
