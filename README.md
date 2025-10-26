@@ -36,3 +36,9 @@ in the `tests/TestCase.php:setup()` method
 `$this->withoutVite();`
 
 see for workflow references: https://github.com/laravel/framework/tree/12.x/.github/workflows
+
+
+
+check what is in the composer cache
+`ls $(composer config cache-files-dir)`
+composer us this cache to speed up installs
