@@ -46,7 +46,7 @@ jobs:
         run: dir=$(composer config cache-files-dir) >> $GITHUB_OUTPUT
 
       - name: Cache Composer Dependencies
-        uses: actions/cache@v4.3.0
+        uses: actions/cache@v3
         with:
           key: composer-cache-${{ hashFiles('**/composer.lock') }}
           path: ${{ steps.composer-cache-dir.outputs.dir }}
