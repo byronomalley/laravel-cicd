@@ -29,6 +29,11 @@ jobs:
           MYSQL_DATABASE: 'laravel'
           MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
 
+    env:
+      PHP_VERSION: '8.4'
+      PHP_EXTENSIONS: dom, curl, libxml, mbstring, zip, pcntl, pdo, odbc, pdo_odbc, :php-psr
+      CACHE_KEY: extension-cache-v1
+
     steps:
       - name: Checkout Code
         uses: actions/checkout@v5.0.0
@@ -37,9 +42,9 @@ jobs:
         id: extcache
         uses: shivammathur/cache-extensions@v1
         with:
-          php-version: '8.4'
-          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, odbc, pdo_odbc, :php-psr
-          key: extension-cache-v1
+          php-version: ${{ env.PHP_VERSION }}
+          extensions: ${{ env.PHP_EXTENSIONS }}
+          key: ${{ env.CACHE_KEY }}
 
       - name: Cache extensions
         uses: actions/cache@v4
@@ -52,8 +57,8 @@ jobs:
       - name: Setup PHP and Composer
         uses: shivammathur/setup-php@2.35.5
         with:
-          php-version: '8.4'
-          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, odbc, pdo_odbc, :php-psr
+          php-version: ${{ env.PHP_VERSION }}
+          extensions: ${{ env.PHP_EXTENSIONS }}
           tools: composer:v2
 
 
@@ -62,10 +67,10 @@ jobs:
         run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
 
       - name: Cache Composer Dependencies
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
-          key: composer-cache-${{ hashFiles('**/composer.lock') }}
           path: ${{ steps.composer-cache-dir.outputs.dir }}
+          key: composer-cache-${{ hashFiles('**/composer.lock') }}
           restore-keys: composer-cache-
 
       - name: Install Dependencies
@@ -79,7 +84,4 @@ jobs:
           php artisan migrate
 
       - name: Run Tests
-        env:
-          DB_CONNECTION: sqlite
-          DB_DATABASE: ':memory:'
         run: php artisan test --compact
