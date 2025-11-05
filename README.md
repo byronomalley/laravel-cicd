@@ -44,3 +44,9 @@ https://github.com/shivammathur/cache-extensions
 check what is in the composer cache
 `ls $(composer config cache-files-dir)`
 composer us this cache to speed up installs
+
+
+git project this is based on: https://github.com/laracasts/continuous-integration
+
+github actions:
+https://github.com/actions/runner-images/blob/main/images/ubuntu/Ubuntu2404-Readme.md

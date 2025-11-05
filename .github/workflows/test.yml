@@ -39,6 +39,7 @@ jobs:
           php-version: '8.4'
           nova-email: ${{ secrets.NOVA_EMAIL }}
           nova-password: ${{ secrets.NOVA_PASSWORD }}
+          coverage: xdebug # Enable xdebug for code coverage
 
       - name: Install Dependencies
         run: composer install -q --no-interaction

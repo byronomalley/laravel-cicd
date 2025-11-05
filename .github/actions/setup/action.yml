@@ -16,6 +16,10 @@ inputs:
   nova-password:
     description: The password for Laravel Nova authentication.
     required: true
+  coverage:
+    description: The coverage driver to use.
+    required: false
+    default: none
 
 runs:
   using: composite
@@ -47,6 +51,7 @@ runs:
         php-version: ${{ inputs.php-version }}
         extensions: ${{ inputs.php-extensions }}
         tools: composer:v2
+        coverage: ${{ inputs.coverage }} # only use xdebug if you need it for code coverage
 
 
     - name: Get Composer Cache Directory
