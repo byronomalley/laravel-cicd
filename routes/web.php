@@ -5,7 +5,6 @@ use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
 
-
 Route::get('/', function () {
     Redis::incr('landing-page-views');
     $seed = Session::remember('users.seed', fn () => rand(0, 100));
