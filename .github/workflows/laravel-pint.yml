@@ -3,6 +3,8 @@ name: Laravel Pint
 on:
   push:
     branches:
+      # If this is left on main, it will create duplicate deployments: pull request is merged, main is updated,
+      # pint runs, pint makes changes, main is updated again, another deployment is created.
       - main
 
 permissions:
